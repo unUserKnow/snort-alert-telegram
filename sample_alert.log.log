@@ -1,0 +1,34 @@
+[**] [RECON] ICMP Ping detectado [**]
+[Priority: 3]
+07/01-12:00:00.000000 192.168.1.50 -> 192.168.1.1
+ICMP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:28 Echo Req Seq 1
+
+[**] [RECON] Escaneo SYN detectado [**]
+[Priority: 3]
+07/01-12:01:15.123456 192.168.1.50:12345 -> 192.168.1.1:80
+TCP TTL:64 TOS:0x0 ID:54321 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x1a2b3c4d Ack: 0x5d6e7f8a Win: 0x4000 TcpLen: 20
+
+[**] [DoS] Posible SYN Flood [**]
+[Priority: 2]
+07/01-12:02:30.654321 10.0.0.20:54321 -> 192.168.1.1:80
+TCP TTL:128 TOS:0x0 ID:23456 IpLen:20 DgmLen:40
+Flags: S Seq: 0x00000001 Win: 0x4000 TcpLen: 20
+
+[**] [INYECCION] Posible SQL Injection [**]
+[Priority: 1]
+07/01-12:03:45.987654 172.16.0.15:33333 -> 192.168.1.100:80
+TCP TTL:64 TOS:0x0 ID:11111 IpLen:20 DgmLen:60
+Content: ' OR 1=1 --
+
+[**] [EXPLOIT] Tráfico sospechoso de explotación CVE [**]
+[Priority: 1]
+07/01-12:05:00.123456 192.168.1.200:44444 -> 192.168.1.1:80
+TCP TTL:64 TOS:0x0 ID:22222 IpLen:20 DgmLen:70
+Content: /etc/passwd
+
+[**] [MALWARE] Posible conexión C2 - curl [**]
+[Priority: 1]
+07/01-12:06:10.543210 10.10.10.10:55555 -> 192.168.1.1:80
+TCP TTL:64 TOS:0x0 ID:33333 IpLen:20 DgmLen:50
+Content: User-Agent: curl

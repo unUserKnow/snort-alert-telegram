@@ -1,0 +1,8 @@
+# Librerías estándar de Python (no se instalan con pip)
+json
+time
+os
+socket
+
+# Librería externa necesaria (instalable con pip)
+requests

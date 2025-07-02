@@ -1,0 +1,31 @@
+# ===== FASE I: Reconocimiento y Mapeo =====
+
+alert icmp any any -> any any (msg:"[TEST] ICMP Ping detectado"; sid:1000001; rev:1;)
+
+
+alert icmp any any -> any any (msg:"[RECON] ICMP Ping detectado"; sid:1001001; rev:1;)
+alert tcp any any -> any any (flags:S; msg:"[RECON] Escaneo SYN detectado"; sid:1001002; rev:1;)
+alert tcp any any -> any any (flags:S,12; msg:"[RECON] Escaneo TCP Connect detectado"; sid:1001003; rev:1;)
+#alert udp any any -> any any (msg:"[RECON] Escaneo UDP detectado"; sid:1001004; rev:1;)
+alert udp any any -> any 161 (msg:"[RECON] UDP Scan SNMP port 161"; sid:1001500; rev:1;)
+alert tcp any any -> any any (flags:F; msg:"[RECON] FIN scan detectado"; sid:1001005; rev:1;)
+alert tcp any any -> any any (flags:0; msg:"[RECON] NULL scan detectado"; sid:1001006; rev:1;)
+alert tcp any any -> any any (flags:FPU; msg:"[RECON] Xmas scan detectado"; sid:1001007; rev:1;)
+alert tcp any any -> any 21 (msg:"[RECON] Banner FTP posible escaneo"; content:"220"; sid:1001008; rev:1;)
+alert tcp any any -> any 22 (msg:"[RECON] Banner SSH posible escaneo"; content:"SSH-"; sid:1001009; rev:1;)
+
+# ===== FASE II: Ataques DoS/DDoS =====
+
+alert icmp any any -> any any (msg:"[DoS] Posible ICMP Flood"; threshold:type threshold, track by_src, count 20, seconds 5; sid:1002001; rev:1;)
+alert tcp any any -> any any (flags:S; msg:"[DoS] Posible SYN Flood"; threshold:type threshold, track by_src, count 20, seconds 3; sid:1002002; rev:1;)
+alert udp any any -> any any (msg:"[DoS] Posible UDP Flood"; threshold:type threshold, track by_src, count 30, seconds 5; sid:1002003; rev:1;)
+
+# ===== FASE III: Acceso y Explotación =====
+
+#alert tcp any any -> any 80 (msg:"[INYECCION] Posible SQL Injection"; content:"' OR 1=1"; nocase; sid:1003001; rev:1;)
+#alert tcp any any -> any 80 (msg:"[INYECCION] Command Injection Detectada"; content:"; "; nocase; sid:1003002; rev:4;)
+#alert tcp any any -> any 80 (msg:"[INYECCION] Posible XSS detectado"; content:"<script>"; nocase; sid:1003003; rev:1;)
+#alert tcp any any -> any 22 (msg:"[ACCESO] Múltiples intentos SSH"; flags:S; threshold:type threshold, track by_src, count 5, seconds 10; sid:1003004; rev:1;)
+#alert tcp any any -> any any (msg:"[EXPLOIT] Tráfico sospechoso de explotación CVE"; content:"/etc/passwd"; sid:1003005; rev:1;)
+#alert udp any any -> any 53 (msg:"[ENUMERACION] Transferencia DNS sospechosa"; content:"AXFR"; sid:1003006; rev:1;)
+#alert tcp any any -> any any (msg:"[MALWARE] Posible conexión C2 - curl"; content:"User-Agent|3a| curl"; sid:1003007; rev:1;)
