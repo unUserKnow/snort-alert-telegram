@@ -1,6 +1,6 @@
 {
-  "bot_token": "", 
-  "chat_id": "",
+  "bot_token": "TuTokenAqui", 
+  "chat_id": "TuChatIdAqui",
   "alert_log": "C:\\Snort\\log\\alert",
-  "trusted_ip": "192.168.20.137"
+  "trusted_ip": "TuIP_QueVaEscanearTured"
 }
